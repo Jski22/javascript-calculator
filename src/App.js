@@ -10,16 +10,16 @@ function App() {
     <div className="App">
       <Card bg={'warning'} style={{ width: 'calc(22rem + 1vmin)', height: '24rem'}}>
         <Row>
-          <Col sm={12}>Display Text</Col>
+          <Col xs={12}>Display Text</Col>
         </Row>
         <Row>
-          <Col sm={6}>
-            <Button>AC</Button>
+          <Col xs={6}>
+            <Button style={{width: '100%'}}>AC</Button>
           </Col>
-          <Col sm={3}>
+          <Col xs={3}>
             <Button>/</Button>
           </Col>
-          <Col sm={3}>
+          <Col xs={3}>
             <Button>X</Button>
           </Col>
         </Row>
