@@ -1,5 +1,5 @@
 .App {
-  background-color: #282c34;
+  background-color: #565c69;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -7,4 +7,27 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+button {
+  width: 100%;
+}
+
+.card {
+  background-color: #ff8502;
+}
+
+#equals {
+  height: 230%;
+}
+
+.row {
+  padding-bottom: 7px;
+  padding-top: 7px;
+}
+
+#display {
+  background-color: black;
+  padding-bottom: 20px;
+  text-align: right;
 }
