@@ -11,9 +11,16 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      input: '0'
+      input: 0
     };
+  this.handleClick = this.handleClick.bind(this); 
   };
+
+  handleClick() {
+    this.setState(state => ({
+      input: state.input + 9
+    }));
+  } 
 
   render() {
     return (
@@ -43,7 +50,7 @@ class App extends React.Component {
               <Button size="lg" variant="light">8</Button>
             </Col>
             <Col xs={3}>
-              <Button size="lg" variant="light">9</Button>
+              <Button size="lg" variant="light" onClick={this.handleClick}>9</Button>
             </Col>
             <Col xs={3}>
               <Button size="lg" variant="dark">-</Button>
