@@ -11,21 +11,29 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      input: "0"
+      display: "0"
     };
   this.handleClick = this.handleClick.bind(this); 
   this.reset = this.reset.bind(this);
   };
 
-  handleClick() {
-    this.setState(state => ({
-      input: state.input.concat("9")
-    }));
+  handleClick(event) {
+    let num = event.target.value;
+
+    if (this.state.display === "0") {
+      this.setState({
+        display: num
+      });
+    } else {
+      this.setState(state => ({
+        display: state.display + num
+      }));
+    }
   } 
 
   reset() {
     this.setState({
-      input: "0"
+      display: "0"
     });
   }
 
@@ -35,18 +43,18 @@ class App extends React.Component {
         <Card style={{ width: 'calc(22rem + 1vmin)', height: '24rem'}}>
           <Row>
             <Col xs={12}>
-              <Container id="display">{this.state.input}</Container>
+              <Container id="display">{this.state.display}</Container>
             </Col>
           </Row>
           <Row>
             <Col xs={6}>
-              <Button size="lg" variant="danger" onClick={this.reset}>AC</Button>
+              <Button size="lg" variant="danger"  onClick={this.reset}>AC</Button>
             </Col>
             <Col xs={3}>
               <Button size="lg" variant="dark">/</Button>
             </Col>
             <Col xs={3}>
-              <Button size="lg" variant="dark">x</Button>
+              <Button size="lg" variant="dark" value="*" onClick={this.handleClick}>x</Button>
             </Col>
           </Row>
           <Row>
@@ -54,10 +62,10 @@ class App extends React.Component {
               <Button size="lg" variant="light">7</Button>
             </Col>
             <Col xs={3}>
-              <Button size="lg" variant="light">8</Button>
+              <Button size="lg" variant="light" value="8" onClick={this.handleClick}>8</Button>
             </Col>
             <Col xs={3}>
-              <Button size="lg" variant="light" onClick={this.handleClick}>9</Button>
+              <Button size="lg" variant="light" value="9" onClick={this.handleClick}>9</Button>
             </Col>
             <Col xs={3}>
               <Button size="lg" variant="dark">-</Button>
