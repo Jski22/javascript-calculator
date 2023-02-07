@@ -11,16 +11,23 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      input: 0
+      input: "0"
     };
   this.handleClick = this.handleClick.bind(this); 
+  this.reset = this.reset.bind(this);
   };
 
   handleClick() {
     this.setState(state => ({
-      input: state.input + 9
+      input: state.input.concat("9")
     }));
   } 
+
+  reset() {
+    this.setState({
+      input: "0"
+    });
+  }
 
   render() {
     return (
@@ -33,7 +40,7 @@ class App extends React.Component {
           </Row>
           <Row>
             <Col xs={6}>
-              <Button size="lg" variant="danger">AC</Button>
+              <Button size="lg" variant="danger" onClick={this.reset}>AC</Button>
             </Col>
             <Col xs={3}>
               <Button size="lg" variant="dark">/</Button>
