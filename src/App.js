@@ -14,8 +14,10 @@ class App extends React.Component {
       display: "0"
     };
   this.handleClick = this.handleClick.bind(this); 
+  this.decimalClick = this.decimalClick.bind(this);
+  this.opClick = this.opClick.bind(this);
   this.reset = this.reset.bind(this);
-  this.equals = this.equals.bind(this);
+  this.equalClick = this.equalClick.bind(this);
   };
 
   handleClick(event) {
@@ -27,24 +29,47 @@ class App extends React.Component {
       });
     } else {
       this.setState(state => ({
-        display: state.display + num
+        display: state.display + num 
       }));
     }
-  } 
+  }; 
 
+  decimalClick(event) {
+    let dClick = event.target.value;
+    let arr = this.state.display.split(" ");
+    let lastArEl = arr[arr.length - 1];
+
+   if (lastArEl.includes(".") === true) {
+      console.log('multiple decimals')
+      
+    } else {
+      this.setState(state => ({
+        display: state.display + dClick
+      }));
+    }
+  };
+
+  opClick(event) {
+    let opClicked = event.target.value;
+
+    this.setState(state => ({
+      display: `${state.display} ${opClicked} `
+    }));
+  };
+  
   reset() {
     this.setState({
       display: "0"
     });
-  }
+  };
 
-  equals() {
-    let result = Function("return " + this.state.display)();
+  equalClick() {
+    let result = Function(`return ${this.state.display}`)();
 
     this.setState({
       display: result
     });
-  }
+  };
 
   render() {
     return (
@@ -57,13 +82,13 @@ class App extends React.Component {
           </Row>
           <Row>
             <Col xs={6}>
-              <Button id="clear" size="lg" variant="danger"  onClick={this.reset}>AC</Button>
+              <Button id="clear" size="lg" variant="danger" onClick={this.reset}>AC</Button>
             </Col>
             <Col xs={3}>
-              <Button id="divide" size="lg" variant="dark" value="/" onClick={this.handleClick}>/</Button>
+              <Button id="divide" size="lg" variant="dark" value="/" onClick={this.opClick}>/</Button>
             </Col>
             <Col xs={3}>
-              <Button id="multiply" size="lg" variant="dark" value="*" onClick={this.handleClick}>x</Button>
+              <Button id="multiply" size="lg" variant="dark" value="*" onClick={this.opClick}>x</Button>
             </Col>
           </Row>
           <Row>
@@ -77,7 +102,7 @@ class App extends React.Component {
               <Button id="nine" size="lg" variant="light" value="9" onClick={this.handleClick}>9</Button>
             </Col>
             <Col xs={3}>
-              <Button id="subtract" size="lg" variant="dark" value="-" onClick={this.handleClick}>-</Button>
+              <Button id="subtract" size="lg" variant="dark" value="-" onClick={this.opClick}>-</Button>
             </Col>
           </Row>
           <Row>
@@ -91,7 +116,7 @@ class App extends React.Component {
               <Button id="six" size="lg" variant="light" value="6" onClick={this.handleClick}>6</Button>
             </Col>
             <Col xs={3}>
-              <Button id="add" size="lg" variant="dark" value="+" onClick={this.handleClick}>+</Button>
+              <Button id="add" size="lg" variant="dark" value="+" onClick={this.opClick}>+</Button>
             </Col>
           </Row>
           <Row>
@@ -105,7 +130,7 @@ class App extends React.Component {
               <Button id="three" size="lg" variant="light" value="3" onClick={this.handleClick}>3</Button>
             </Col>
             <Col xs={3}>
-              <Button id="equals" size="lg" onClick={this.equals}>=</Button>
+              <Button id="equals" size="lg" onClick={this.equalClick}>=</Button>
             </Col>
           </Row>
           <Row>
@@ -113,7 +138,7 @@ class App extends React.Component {
               <Button id="zero" size="lg" variant="light" value="0" onClick={this.handleClick}>0</Button>
             </Col>
             <Col xs={3}>
-              <Button id="decimal" size="lg" variant="light" value="." onClick={this.handleClick}>.</Button>
+              <Button id="decimal" size="lg" variant="light" value="." onClick={this.decimalClick}>.</Button>
             </Col>
           </Row>
         </Card>
