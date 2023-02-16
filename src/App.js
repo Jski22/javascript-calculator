@@ -11,10 +11,10 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      display: "0"
+      display: ""
     };
   this.handleClick = this.handleClick.bind(this); 
-  this.decimalClick = this.decimalClick.bind(this);
+  //this.decimalClick = this.decimalClick.bind(this);
   this.opClick = this.opClick.bind(this);
   this.reset = this.reset.bind(this);
   this.equalClick = this.equalClick.bind(this);
@@ -22,19 +22,29 @@ class App extends React.Component {
 
   handleClick(event) {
     let num = event.target.value;
+    let arr1 = this.state.display.split(" ");
+    let lastArEl = arr1[arr1.length - 1];
 
     if (this.state.display === "0") {
       this.setState({
         display: num
       });
-    } else {
+    } else if (lastArEl === "0") {
+      arr1.splice(-1, 1, num)
+      let newDis = arr1.join(" ").toString();
+      
+      this.setState({
+        display: newDis
+      });
+    } 
+    else {
       this.setState(state => ({
         display: state.display + num 
       }));
     }
   }; 
 
-  decimalClick(event) {
+  /*decimalClick(event) {
     let dClick = event.target.value;
     let arr = this.state.display.split(" ");
     let lastArEl = arr[arr.length - 1];
@@ -47,7 +57,7 @@ class App extends React.Component {
         display: state.display + dClick
       }));
     }
-  };
+  };*/
 
   opClick(event) {
     let opClicked = event.target.value;
@@ -59,16 +69,17 @@ class App extends React.Component {
   
   reset() {
     this.setState({
-      display: "0"
+      display: ""
     });
   };
 
   equalClick() {
-    let result = Function(`return ${this.state.display}`)();
-
+    let equation = this.state.display;
+    let result = Function("return " + equation)();
+    
     this.setState({
       display: result
-    });
+    })
   };
 
   render() {
@@ -138,7 +149,7 @@ class App extends React.Component {
               <Button id="zero" size="lg" variant="light" value="0" onClick={this.handleClick}>0</Button>
             </Col>
             <Col xs={3}>
-              <Button id="decimal" size="lg" variant="light" value="." onClick={this.decimalClick}>.</Button>
+              <Button id="decimal" size="lg" variant="light" value="." onClick={this.handleClick}>.</Button>
             </Col>
           </Row>
         </Card>
