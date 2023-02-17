@@ -11,10 +11,11 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      default: "0",
       display: ""
     };
   this.handleClick = this.handleClick.bind(this); 
-  //this.decimalClick = this.decimalClick.bind(this);
+  this.decimalClick = this.decimalClick.bind(this);
   this.opClick = this.opClick.bind(this);
   this.reset = this.reset.bind(this);
   this.equalClick = this.equalClick.bind(this);
@@ -22,7 +23,7 @@ class App extends React.Component {
 
   handleClick(event) {
     let num = event.target.value;
-    let arr1 = this.state.display.split(" ");
+    let arr1 = this.state.display.toString().split(" ");
     let lastArEl = arr1[arr1.length - 1];
 
     if (this.state.display === "0") {
@@ -31,7 +32,7 @@ class App extends React.Component {
       });
     } else if (lastArEl === "0") {
       arr1.splice(-1, 1, num)
-      let newDis = arr1.join(" ").toString();
+      let newDis = arr1.join(" ");
       
       this.setState({
         display: newDis
@@ -44,7 +45,7 @@ class App extends React.Component {
     }
   }; 
 
-  /*decimalClick(event) {
+  decimalClick(event) {
     let dClick = event.target.value;
     let arr = this.state.display.split(" ");
     let lastArEl = arr[arr.length - 1];
@@ -57,7 +58,7 @@ class App extends React.Component {
         display: state.display + dClick
       }));
     }
-  };*/
+  };
 
   opClick(event) {
     let opClicked = event.target.value;
@@ -75,7 +76,7 @@ class App extends React.Component {
 
   equalClick() {
     let equation = this.state.display;
-    let result = Function("return " + equation)();
+    let result = eval(equation);
     
     this.setState({
       display: result
@@ -88,7 +89,7 @@ class App extends React.Component {
         <Card style={{ width: 'calc(22rem + 1vmin)', height: '24rem'}}>
           <Row>
             <Col xs={12}>
-              <Container id="display">{this.state.display}</Container>
+              <Container id="display">{this.state.display !== "" ? this.state.display : this.state.default}</Container>
             </Col>
           </Row>
           <Row>
@@ -149,7 +150,7 @@ class App extends React.Component {
               <Button id="zero" size="lg" variant="light" value="0" onClick={this.handleClick}>0</Button>
             </Col>
             <Col xs={3}>
-              <Button id="decimal" size="lg" variant="light" value="." onClick={this.handleClick}>.</Button>
+              <Button id="decimal" size="lg" variant="light" value="." onClick={this.decimalClick}>.</Button>
             </Col>
           </Row>
         </Card>
