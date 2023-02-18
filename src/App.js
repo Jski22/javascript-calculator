@@ -24,13 +24,13 @@ class App extends React.Component {
   handleClick(event) {
     let num = event.target.value;
     let arr1 = this.state.display.toString().split(" ");
-    let lastArEl = arr1[arr1.length - 1];
+    let lastArEl1 = arr1[arr1.length - 1];
 
     if (this.state.display === "0") {
       this.setState({
         display: num
       });
-    } else if (lastArEl === "0") {
+    } else if (lastArEl1 === "0") {
       arr1.splice(-1, 1, num)
       let newDis = arr1.join(" ");
       
@@ -62,10 +62,25 @@ class App extends React.Component {
 
   opClick(event) {
     let opClicked = event.target.value;
+    let arr2 = this.state.display.toString().split("");
+    console.log(opClicked)
 
-    this.setState(state => ({
-      display: `${state.display} ${opClicked} `
-    }));
+    if (opClicked === "-") {
+      this.setState(state => ({
+        display: `${state.display} ${opClicked} `
+      }));
+    } else if (arr2[arr2.length-2] === "+" || arr2[arr2.length-2] === "/" || arr2[arr2.length-2] === "*" || arr2[arr2.length-2] === "-") {
+        arr2.splice(-2, 1, opClicked)
+        let chgOp = arr2.join("");
+
+        this.setState({
+          display: chgOp
+        });
+    } else {
+        this.setState(state => ({
+          display: `${state.display} ${opClicked} `
+        }));
+      }
   };
   
   reset() {
