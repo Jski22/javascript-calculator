@@ -79,7 +79,7 @@ class App extends React.Component {
           display: chgTwoOps
         });
 
-    } else if (ops.test(lastArOp) === true)/*(arr2[arr2.length-2] === "+" || arr2[arr2.length-2] === "/" || arr2[arr2.length-2] === "*" || arr2[arr2.length-2] === "-")*/ {
+    } else if (ops.test(lastArOp) === true) {
         arr2.splice(-2, 1, opClicked)
         let chgOp = arr2.join("");
 
