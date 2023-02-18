@@ -63,13 +63,23 @@ class App extends React.Component {
   opClick(event) {
     let opClicked = event.target.value;
     let arr2 = this.state.display.toString().split("");
-    console.log(opClicked)
+    let lastArOp = arr2[arr2.length-2];
+    let lastArOp2 = arr2[arr2.length-5];
+    let ops = /[-+*/]/;
 
     if (opClicked === "-") {
       this.setState(state => ({
         display: `${state.display} ${opClicked} `
       }));
-    } else if (arr2[arr2.length-2] === "+" || arr2[arr2.length-2] === "/" || arr2[arr2.length-2] === "*" || arr2[arr2.length-2] === "-") {
+    } else if (ops.test(lastArOp2) === true) { 
+      arr2.splice(-5, 4, opClicked)
+        let chgTwoOps = arr2.join("");
+
+        this.setState({
+          display: chgTwoOps
+        });
+
+    } else if (ops.test(lastArOp) === true)/*(arr2[arr2.length-2] === "+" || arr2[arr2.length-2] === "/" || arr2[arr2.length-2] === "*" || arr2[arr2.length-2] === "-")*/ {
         arr2.splice(-2, 1, opClicked)
         let chgOp = arr2.join("");
 
